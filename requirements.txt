@@ -52,7 +52,7 @@ countryinfo==0.1.2
 html2text==2024.2.26
 bs4==0.0.2
 bing_image_downloader==1.1.2
-search_engine_parser==0.6.5
+search_engine_parser==0.6.8
 pytz==2024.2
 lyricsgenius==3.0.1
 tswift==1.1.0
