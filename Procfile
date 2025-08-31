@@ -1,1 +1,1 @@
-web: python __main__.py
+web: python3 -m ZarinaBot
