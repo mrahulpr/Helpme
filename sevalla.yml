@@ -1,0 +1,75 @@
+# Sevalla Cloud Deployment Configuration for ZarinaBot
+# This file configures the deployment for Sevalla cloud hosting
+
+name: zarinabot-telegram
+type: python
+version: 3.11
+
+# Environment variables - these will be set in Sevalla dashboard
+env:
+  # Required Telegram Bot Configuration
+  TOKEN: ${TOKEN}
+  API_ID: ${API_ID}
+  API_HASH: ${API_HASH}
+  OWNER_ID: ${OWNER_ID}
+  BOT_ID: ${BOT_ID}
+  
+  # Database Configuration
+  MONGO_DB_URI: ${MONGO_DB_URI}
+  SQLALCHEMY_DATABASE_URI: ${SQLALCHEMY_DATABASE_URI}
+  
+  # Support & Logging
+  SUPPORT_CHAT: ${SUPPORT_CHAT}
+  EVENT_LOGS: ${EVENT_LOGS}
+  JOIN_LOGGER: ${JOIN_LOGGER}
+  
+  # API Keys
+  CASH_API_KEY: ${CASH_API_KEY}
+  TIME_API_KEY: ${TIME_API_KEY}
+  API_OPENWEATHER: ${API_OPENWEATHER}
+  AI_API_KEY: ${AI_API_KEY}
+  
+  # Bot Configuration
+  ALLOW_EXCL: "True"
+  DEL_CMDS: "True"
+  STRICT_GBAN: "True"
+  ENV: "ANYTHING"
+
+# Build configuration
+build:
+  - pip install -r sevalla-requirements.txt
+  - python -c "import nltk; nltk.download('punkt'); nltk.download('stopwords')"
+
+# Run configuration
+run: python -m ZarinaBot
+
+# Health check
+health_check:
+  path: /health
+  interval: 30s
+  timeout: 10s
+
+# Resources
+resources:
+  memory: 512Mi
+  cpu: 500m
+
+# Scaling
+scaling:
+  min: 1
+  max: 3
+  target_cpu: 70
+
+# Ports
+ports:
+  - containerPort: 8080
+    protocol: TCP
+
+# Storage
+storage:
+  - name: logs
+    size: 1Gi
+    path: /app/logs
+  - name: data
+    size: 2Gi
+    path: /app/data
