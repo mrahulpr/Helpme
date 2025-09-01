@@ -33,7 +33,7 @@ heroku3==5.2.1
 spamwatch==0.3.0
 alphabet_detector==0.0.7
 pyrate-limiter==3.6.1
-cachetools==5.5.0
+cachetools==4.2.2
 ujson==5.10.0
 pretty_errors==1.2.25
 TgCrypto==1.2.5
